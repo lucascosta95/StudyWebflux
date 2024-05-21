@@ -1,4 +1,6 @@
 spring:
   data:
     mongodb:
-      uri:
+      uri: ${DB_CONNECTION}
+  application:
+    name: study-webflux
