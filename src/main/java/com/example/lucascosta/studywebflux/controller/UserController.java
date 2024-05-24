@@ -2,6 +2,7 @@ package com.example.lucascosta.studywebflux.controller;
 
 import com.example.lucascosta.studywebflux.model.request.UserRequest;
 import com.example.lucascosta.studywebflux.model.response.UserResponse;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +22,7 @@ public interface UserController {
     ResponseEntity<Flux<UserResponse>> findAll();
 
     @PostMapping
-    ResponseEntity<Mono<Void>> save(@RequestBody UserRequest request);
+    ResponseEntity<Mono<Void>> save(@Valid @RequestBody UserRequest request);
 
     @PatchMapping("/{id}")
     ResponseEntity<Mono<UserResponse>> update(@PathVariable String id, @RequestBody UserRequest request);
