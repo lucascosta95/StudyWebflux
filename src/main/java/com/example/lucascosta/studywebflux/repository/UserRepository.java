@@ -3,6 +3,8 @@ package com.example.lucascosta.studywebflux.repository;
 import com.example.lucascosta.studywebflux.entity.UserEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -23,5 +25,9 @@ public class UserRepository {
 
     public Flux<UserEntity> findAll() {
         return reactiveMongoTemplate.findAll(UserEntity.class);
+    }
+
+    public Mono<UserEntity> findAndRemoveById(String id) {
+        return reactiveMongoTemplate.findAndRemove(new Query().addCriteria(Criteria.where("id").is(id)), UserEntity.class);
     }
 }
